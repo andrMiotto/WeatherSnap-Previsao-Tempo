@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Weather Snap</title>
+
+</head>
+
+<body class="bg-slate-800">
+
+    <header class="header">
+        <div class=" header-inner flex justify-center items-center pb-10 m-10 gap-2">
+            <p class="font-mono text-4xl center  text-white">Weather Snap</p>
+            <img src="/Images/Icons/cloud-sun.svg" alt="Heather">
+
+        </div>
+    </header>
+
+    <main class="flex justify-center">
+
+        <section class="main-content w-full max-w-md">
+
+            <section class="home text-white flex justify-between items-center">
+
+                <div class="home-btn flex justify-evenly gap-2 bg-white/40  text-white px-4 py-2 ">
+                    <img src="/Images/Icons/house.svg" alt="House">
+                    <p class="font-semibold">Home</p>
+                </div>
+
+
+                <div class="compare flex gap-2">
+                    <img src="/Images/Icons/bar-chart.svg" alt="Compare">
+                    <p class="font-semibold">Comparar</p>
+                    <p class="bg-white text-stone-950 rounded-full  w-6 h-6 flex items-center justify-center">3</p>
+                </div>
+
+            </section>
+
+            <section class="main-card mt-10">
+
+                <div class="search-section text-white bg-white/40 px-4 py-2 flex items-center justify-between">
+                    <p class="text-white/60">Buscar cidade...</p>
+
+                    <p class="text-white font-semibold">Buscar</p>
+                </div>
+
+
+                <div class="inner-card flex justify-center mt-2     bg-white/40 text-white">
+                    <div class="top-informations">
+                        <div class="city">Corupá</div>
+                        <div class="date">Domingo 15 de Março</div>
+                        <div class="share">
+                            <img src="/Images/Icons/share.svg" alt="Share">
+
+                        </div>
+                        <div class="analytics">
+
+                            <img src="/Images/Icons/bar-chart-fill.svg" alt="Compare">
+
+                        </div>
+                    </div>
+
+                    <div class="temperature"></div>
+                    <div class="stats-temp"></div>
+
+
+                    <div class="suggestion"></div>
+
+                    <div class="next-days">
+                        <div class="day-card"></div>
+                        <div class="day-card"></div>
+                        <div class="day-card"></div>
+                    </div>
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+
+
+</body>
+
+</body>
+
+</html>
