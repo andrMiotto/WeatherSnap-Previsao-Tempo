@@ -48,36 +48,68 @@
                 </div>
 
 
-                <div class="inner-card flex mt-2     bg-white/40 text-white">
+                <div class="inner-card mt-2  p-3   bg-white/40 text-white">
 
-                    <div class="top-informations flex">
+                    <div class="top-informations flex justify-between items-baseline">
                         <div class="left-informations">
-                            <div class="city text-5xl">Corupá</div>
-                            <div class="date">Domingo 15 de Março</div>
+                            <div class="city text-3xl">Corupá</div>
+                            <div class="date">Domingo, 15 de Março</div>
                         </div>
-                        <div class="right-informations">
-                            <div class="share">
-                                <img src="/Images/Icons/share.svg" alt="Share">
-
-                            </div>
-                            <div class="analytics">
+                        <div class="right-informations flex">
+                            <div
+                                class="analytics rounded-full bg-gray-400 backdrop-blur-md w-6 h-6 flex items-center justify-center ">
 
                                 <img src="/Images/Icons/bar-chart-fill.svg" alt="Compare">
 
                             </div>
+                            <div
+                                class="share bg-gray-400 text-stone-950 rounded-full  w-6 h-6 flex items-center justify-center">
+                                <img src="/Images/Icons/share.svg" alt="Share">
+
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="temperature"></div>
-                    <div class="stats-temp"></div>
+                    <div class="temperature flex justify-center">
+                        17°C
+                    </div>
+
+                    <div class="stats-temp flex justify-center gap-5">
+                        <div class="wind flex">
+                            <img src="/Images/Icons/wind.svg" alt="Share">
+                            <p>5 km/h</p>
+                        </div>
+                        <div class="humidity flex">
+                            <img src="/Images/Icons/droplet.svg" alt="Share">
+                            <p> 80%</p>
+                        </div>
+                    </div>
 
 
-                    <div class="suggestion"></div>
+                    <div class="suggestion flex justify-center">
+                        Dia ideal para ficar em casa, tomar algo quente e relaxar.
+                    </div>
 
-                    <div class="next-days">
-                        <div class="day-card"></div>
-                        <div class="day-card"></div>
-                        <div class="day-card"></div>
+                    <p>Próximos dias</p>
+
+                    <div class="next-days flex justify-center gap-5">
+
+                        <div class="day-card">
+                            <p>qui. </p>
+                            <img src="/Images/Icons/cloud-drizzle-fill.svg" alt="Share">
+                            <p>24°C</p>
+                        </div>
+                        <div class="day-card">
+                            <p>sex. </p>
+                            <img src="/Images/Icons/cloud-sun-fill.svg" alt="Share">
+                            <p>24°C</p>
+                        </div>
+                        <div class="day-card">
+                            <p>sáb. </p>
+                            <img src="/Images/Icons/sun-fill.svg" alt="Share">
+                            <p>24°C</p>
+                        </div>
                     </div>
                 </div>
 
@@ -86,11 +118,6 @@
         </section>
 
     </main>
-
-
-
-
-</body>
 
 </body>
 
