@@ -42,9 +42,11 @@
             <section class="main-card mt-10">
 
                 <div class="search-section text-white bg-white/40 px-4 py-2 flex items-center justify-between">
-                    <p class="text-white/60">Buscar cidade...</p>
+                    <input type="search" placeholder="Buscar cidade..."
+                        class="searching-city text-white/60 bg-transparent outline-none">
+                        
+                    <button type="button" class="search-button text-white font-semibold">Buscar</button>
 
-                    <p class="text-white font-semibold">Buscar</p>
                 </div>
 
 
@@ -52,7 +54,9 @@
 
                     <div class="top-informations flex justify-between items-baseline">
                         <div class="left-informations">
-                            <div class="city text-3xl">Corupá</div>
+                            <div class="city-card text-3xl">
+                                <p class="city">Corupá</p>
+                            </div>
                             <div class="date">Domingo, 15 de Março</div>
                         </div>
                         <div class="right-informations flex">
@@ -71,18 +75,19 @@
                         </div>
                     </div>
 
-                    <div class="temperature flex justify-center">
-                        °C
+                    <div class=" flex justify-center">
+                        <p class="temperature text-5xl"></p>
                     </div>
 
                     <div class="stats-temp flex justify-center gap-5">
-                        <div class="wind flex">
+                        <div class="wind-card flex">
                             <img src="/Images/Icons/wind.svg" alt="Share">
-                            <p>5 km/h</p>
+
+                            <p class="wind">km/h</p>
                         </div>
-                        <div class="humidity flex">
+                        <div class="humidity-card flex">
                             <img src="/Images/Icons/droplet.svg" alt="Share">
-                            <p> 80%</p>
+                            <p class="humidity">%</p>
                         </div>
                     </div>
 
@@ -118,6 +123,7 @@
         </section>
 
     </main>
+    <script src="main.js"></script>
 
 </body>
 
