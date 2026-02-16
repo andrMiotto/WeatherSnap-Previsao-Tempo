@@ -1,22 +1,27 @@
+//Geral
+const dateElemento = document.querySelector(".date");
+const bodyElemento = document.querySelector(".body");
+const suggestionElemento = document.querySelector(".suggestion");
+
+//Clima
 const tempElemento = document.querySelector(".temperature");
 const windElemento = document.querySelector(".wind");
 const humidityElemento = document.querySelector(".humidity");
+const innerStats = document.querySelector(".inner-stats-wheater");
+
+//Cidade
 const cityElemento = document.querySelector(".city");
 const cidadeDigitada = document.querySelector(".searching-city");
-const botaoBuscar = document.querySelector(".search-button");
-const dateElemento = document.querySelector(".date");
-const imageTempElemento = document.querySelector(".image-temp");
-const innerStats = document.querySelector(".inner-stats-wheater");
-const bodyElemento = document.querySelector(".body");
 
+//Botões e Imagens
+const botaoBuscar = document.querySelector(".search-button");
 const analyticsElemento = document.querySelector(".analytics");
 const shareElemento = document.querySelector(".share");
 
-
-
+const imageTempElemento = document.querySelector(".image-temp");
 
 const apiKey = "195dc487f4791e835d087050c4c4365d";
- 
+
 
 botaoBuscar.addEventListener("click", () => {
     const cidade = cidadeDigitada.value;
@@ -27,9 +32,8 @@ botaoBuscar.addEventListener("click", () => {
     }
 
 
-
-
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`;
+    const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`;
 
     fetch(url)
         .then((response) => {
@@ -40,12 +44,13 @@ botaoBuscar.addEventListener("click", () => {
 
         .then((data) => {
             tempElemento.textContent = Math.floor(data.main.temp) + "°C";
+
             windElemento.textContent = Math.floor(data.wind.speed) + " Km/h";
             humidityElemento.textContent = Math.floor(data.main.humidity) + " %";
             cityElemento.textContent = data.name;
 
             const isDay = data.weather[0].icon.endsWith("d");
-            
+
             document.body.classList.remove("bg-slate-800", "bg-sky-300", "bg-stone-950");
 
             if (isDay) {
@@ -58,58 +63,76 @@ botaoBuscar.addEventListener("click", () => {
                 shareElemento.classList.add("bg-sky-300");
             }
 
+            const timestamp = data.dt;
+            const timezone = data.timezone;
+            
+            const dataLocal = new Date((timestamp + timezone) * 1000);
+            
+            let dataFormatada = dataLocal.toLocaleDateString("pt-BR", {
+                weekday: "long",
+                day: "2-digit",
+                month: "long"
+            });
+            
+            dataFormatada = dataFormatada
+                .split(" ")
+                .map(p => p.charAt(0).toUpperCase() + p.slice(1))
+                .join(" ");
+            
+            dateElemento.textContent = dataFormatada;
+
+            
             cidadeDigitada.value = "";
 
             const climaPrincipal = data.weather[0].main;
-            const climaDescricao = data.weather[0].description;
 
 
             switch (climaPrincipal) {
                 case "Clear":
                     imageTempElemento.src = "/Images/Icons/colorfull/sun.svg";
                     innerStats.textContent = climaPrincipal;
+                    suggestionElemento.textContent = "Dia ensolarado! Use protetor solar, óculos escuros e mantenha-se hidratado.";
                     break;
-        
+
                 case "Clouds":
                     imageTempElemento.src = "/Images/Icons/colorfull/cloud.png";
                     innerStats.textContent = climaPrincipal;
-
-                    
+                    suggestionElemento.textContent = "Céu nublado. Pode ser uma boa levar um casaco leve, caso esfrie mais tarde.";
                     break;
-        
+
                 case "Rain":
                 case "Drizzle":
                     imageTempElemento.src = "/Images/Icons/colorfull/rain.svg";
                     innerStats.textContent = climaPrincipal;
-
+                    suggestionElemento.textContent = "Chance de chuva! Leve um guarda-chuva ou capa de chuva antes de sair.";
                     break;
-        
+
                 case "Thunderstorm":
                     imageTempElemento.src = "/Images/Icons/colorfull/storm.svg";
                     innerStats.textContent = climaPrincipal;
-
+                    suggestionElemento.textContent = "Tempestade prevista! Evite áreas abertas e leve proteção contra chuva.";
                     break;
-        
+
                 case "Snow":
                     imageTempElemento.src = "/Images/Icons/colorfull/snow.svg";
                     innerStats.textContent = climaPrincipal;
-
+                    suggestionElemento.textContent = "Frio intenso! Use roupas térmicas, luvas e mantenha-se bem agasalhado.";
                     break;
-        
+
                 case "Mist":
                 case "Fog":
                 case "Haze":
                 case "Smoke":
                     imageTempElemento.src = "/Images/Icons/colorfull/cloud.png";
                     innerStats.textContent = climaPrincipal;
-
+                    suggestionElemento.textContent = "Visibilidade reduzida. Redobre a atenção ao dirigir ou caminhar.";
                     break;
-        
+
                 default:
                     imageTempElemento.src = "/Images/Icons/colorfull/cloud.png";
                     innerStats.textContent = climaPrincipal;
-
-            }
+                    suggestionElemento.textContent = "Verifique as condições antes de sair e planeje seu dia com cuidado.";
+                }
 
 
 
