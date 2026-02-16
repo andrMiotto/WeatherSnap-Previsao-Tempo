@@ -22,6 +22,7 @@ const imageTempElemento = document.querySelector(".image-temp");
 
 const apiKey = "195dc487f4791e835d087050c4c4365d";
 
+const dayCards = document.querySelectorAll(".day-card");
 
 botaoBuscar.addEventListener("click", () => {
     const cidade = cidadeDigitada.value;
@@ -65,23 +66,23 @@ botaoBuscar.addEventListener("click", () => {
 
             const timestamp = data.dt;
             const timezone = data.timezone;
-            
+
             const dataLocal = new Date((timestamp + timezone) * 1000);
-            
+
             let dataFormatada = dataLocal.toLocaleDateString("pt-BR", {
                 weekday: "long",
                 day: "2-digit",
                 month: "long"
             });
-            
+
             dataFormatada = dataFormatada
                 .split(" ")
                 .map(p => p.charAt(0).toUpperCase() + p.slice(1))
                 .join(" ");
-            
+
             dateElemento.textContent = dataFormatada;
 
-            
+
             cidadeDigitada.value = "";
 
             const climaPrincipal = data.weather[0].main;
@@ -132,16 +133,59 @@ botaoBuscar.addEventListener("click", () => {
                     imageTempElemento.src = "/Images/Icons/colorfull/cloud.png";
                     innerStats.textContent = climaPrincipal;
                     suggestionElemento.textContent = "Verifique as condições antes de sair e planeje seu dia com cuidado.";
-                }
-
-
-
+            }
 
 
         })
 
         .catch((error) => console.error("Erro:", error));
 
+    fetch(urlForecast)
+        .then(response => {
+            if (!response.ok) throw new Error("Erro na previsão");
+            return response.json();
+        })
+        .then(forecastData => {
+
+            const previsoes = forecastData.list.filter(item =>
+                item.dt_txt.includes("12:00:00")
+            );
+
+            previsoes.slice(1, 4).forEach((dia, index) => {
+
+                const dataDia = new Date(dia.dt * 1000);
+
+                let nomeDia = dataDia.toLocaleDateString("pt-BR", {
+                    weekday: "short"
+                });
+
+                const temp = Math.floor(dia.main.temp);
+
+                const clima = dia.weather[0].main;
+                const weatherIcons = {
+                    Clear: "/Images/Icons/colorfull/sun.svg",
+                    Clouds: "/Images/Icons/colorfull/cloud.png",
+                    Rain: "/Images/Icons/colorfull/rain.svg",
+                    Drizzle: "/Images/Icons/colorfull/rain.svg",
+                    Thunderstorm: "/Images/Icons/colorfull/storm.svg",
+                    Snow: "/Images/Icons/colorfull/snow.svg",
+                    Mist: "/Images/Icons/colorfull/cloud.png",
+                    Fog: "/Images/Icons/colorfull/cloud.png",
+                    Haze: "/Images/Icons/colorfull/cloud.png",
+                    Smoke: "/Images/Icons/colorfull/cloud.png"
+                };
+
+
+                const card = dayCards[index];
+                const iconUrl = weatherIcons[clima] || "/Images/Icons/colorfull/cloud.png";
+
+                card.querySelector(".day-name").textContent = nomeDia;
+                card.querySelector(".day-temp").textContent = temp + "°C";
+                card.querySelector(".day-icon").src = iconUrl;
+            });
+
+        })
+        .catch(error => console.error("Erro forecast:", error));
 
 
 
